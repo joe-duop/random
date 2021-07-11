@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>main cat form</title>
+{% endblock title %}
+
+{% block content %}
+
+<h2>content form</h2>
+<form method="post">
+  {%csrf_token%}
+  {{form.as_p}}
+  <button type="submit">save</button>
+
+</form>
+
+{% endblock content %}
