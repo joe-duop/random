@@ -17,10 +17,10 @@
     {% endblock title %}
   </head>
   <body>
-    <a href="#">home</a>
-    <a href="#">category</a>
-    <a href="#">sub-category</a>
-    <a href="#">content</a>
+    <a href="{% url 'home' %}">home</a>
+    <a href="{% url 'category' %}">category</a>
+    <a href="{% url 'sub_category' %}">sub-category</a>
+    <a href="{% url 'swahili' %}">content</a>
     <a href="#">about</a>
     <a href="#">contact</a>
     {% block content %}

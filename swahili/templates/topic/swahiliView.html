@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>sarufi</title>
+{% endblock title %}
+
+{% block content %}
+
+{% for swa in swahili %}
+<a href="{% url 'swahili_detail' swa.slug %}"><h2>{{swa.title}}</h2></a>
+
+<p>{{swa.main_cat}} - {{swa.category}}</p>
+<small>{{swa.date_created}}</small>
+
+{% endfor %}
+
+{% endblock content %}

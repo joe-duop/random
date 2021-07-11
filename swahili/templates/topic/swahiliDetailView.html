@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>{{srf.title}}</title>
+{% endblock title %}
+
+{% block content %}
+
+<h2>{{swahili_det.title}}</h2>
+<h5>{{swahili_det.category}}</h5>
+<small>{{swahili_det.date_created}}</small>
+<p>{{swahili_det.content|safe}}</p>
+<p>written by <small>{{swahili_det.author}}</small></p>
+
+{% endblock content %}

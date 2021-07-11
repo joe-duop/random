@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>sarufi</title>
+{% endblock title %}
+
+{% block content %}
+
+{% for sub in sw_sub %}
+<a href="{% url 'sub_category_detail' sub.slug %}"><h2>{{sub.title}}</h2></a>
+
+<p>{{sub.main_cat}}</p>
+<small>{{sub.date_created}}</small>
+
+{% endfor %}
+
+{% endblock content %}
