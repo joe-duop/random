@@ -12,6 +12,7 @@ from django.db.models.signals import pre_save
 class SwahiliCategory(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(null=True, blank=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
@@ -21,6 +22,7 @@ class SwahiliSubCategory(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(null=True, blank=True)
     cat = models.ForeignKey(SwahiliCategory, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title

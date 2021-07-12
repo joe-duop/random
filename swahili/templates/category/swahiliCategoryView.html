@@ -6,6 +6,7 @@
 
 {% block content %}
 
+<h2><a href="{% url 'category_create' %}">create</a></h2>
 {% for s_main in sw_main %}
 <a href="{% url 'category_detail' s_main.slug %}"><h2>{{s_main.title}}</h2></a>
 

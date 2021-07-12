@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {% block title %}
 <title>main cat form</title>
 {% endblock title %}
@@ -7,11 +7,14 @@
 {% block content %}
 
 <h2>content form</h2>
-<form method="post">
-  {%csrf_token%}
-  {{form.as_p}}
-  <button type="submit">save</button>
+<div class="container">
+  <form method="post">
+    {%csrf_token%}
+    {{form.media}}
+    {{form|crispy}}
+    <button class="btn btn-primary" type="submit">save</button>
+  </form>
+</div>
 
-</form>
 
 {% endblock content %}
