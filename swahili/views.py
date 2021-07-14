@@ -74,6 +74,20 @@ def swahiliCreateView(request):
         return render(request, "topic/swahiliCreateView.html", context)
 
 
+def swahiliUpdateView(request, slug_text):
+    """allows a user to edit/update content"""
+    edit_content = get_object_or_404(SwahiliContent, slug=slug_text)
+    if request.method == 'POST':
+        content_form = SwahiliContentForm(request.POST, instance=edit_content)
+        if content_form.is_valid():
+            content_form.save()
+            return redirect('swahili')
+    else:
+        content_form = SwahiliContentForm(instance=edit_content)
+        context = {'edit_content':edit_content, 'content_form':content_form}
+        return render(request, 'topic/swahiliUpdateView.html', context)
+
+
 def swahiliDetailView(request, slug_text):
     """shows the details of a specific topic - the contents"""
     swahili_det = get_object_or_404(SwahiliContent, slug=slug_text)

@@ -5,6 +5,7 @@
 {% endblock title %}
 
 {% block content %}
+<h4><a href="{% url 'swahili_update' swahili_det.slug %}">update</a></h4>
 
 <h2>{{swahili_det.title}}</h2>
 <h5>{{swahili_det.category}}</h5>

@@ -17,6 +17,7 @@ urlpatterns = [
     path('topic', views.swahiliView, name="swahili"),
     path('topic/create', views.swahiliCreateView, name='swahili_create'),
     path('topic/<slug:slug_text>', views.swahiliDetailView, name='swahili_detail'),
+    path('topic/<slug:slug_text>/update', views.swahiliUpdateView, name='swahili_update'),
 
 
 
