@@ -5,7 +5,16 @@
 {% endblock title %}
 
 {% block content %}
-<h4><a href="{% url 'swahili_update' swahili_det.slug %}">update</a></h4>
+
+<p>created - {{swahili_det.author.id}}</p>
+<p>current user {{user.id}}</p>
+
+{% if user.is_authenticated %}
+  {% if user.id == swahili_det.author.id %}
+    <h4><a href="{% url 'swahili_update' swahili_det.slug %}">update</a></h4>
+  {% endif %}
+{% endif %}
+
 
 <h2>{{swahili_det.title}}</h2>
 <h5>{{swahili_det.category}}</h5>
