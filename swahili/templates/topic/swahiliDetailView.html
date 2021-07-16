@@ -7,11 +7,15 @@
 {% block content %}
 
 <p>created - {{swahili_det.author.id}}</p>
-<p>current user {{user.id}}</p>
+<p>current user {{user.username}}</p>
+
+
 
 {% if user.is_authenticated %}
-  {% if user.id == swahili_det.author.id %}
-    <h4><a href="{% url 'swahili_update' swahili_det.slug %}">update</a></h4>
+  {% if user.is_staff %}
+    {% if user.id == swahili_det.author.id %}
+      <h4><a href="{% url 'swahili_update' swahili_det.slug %}">update</a></h4>
+    {% endif %}
   {% endif %}
 {% endif %}
 
