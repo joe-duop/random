@@ -6,10 +6,15 @@
 
 {% block content %}
 
-<h2><a href="{% url 'sub_category_create' %}">create</a></h2>
+{% if user.is_authenticated %}
+  {% if user.is_superuser %}
+    <h2><a href="{% url 'sub_category_create' %}">create</a></h2>
+  {% endif %}
+{% endif %}
+
+
 {% for sub in sw_sub %}
 <a href="{% url 'sub_category_detail' sub.slug %}"><h2>{{sub.title}}</h2></a>
-
 <p>{{sub.main_cat}}</p>
 <small>{{sub.date_created}}</small>
 

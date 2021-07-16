@@ -6,13 +6,18 @@
 
 {% block content %}
 
-<h2><a href="{% url 'category_create' %}">create</a></h2>
+<p>current user {{user.username}}</p>
+
+{% if user.is_authenticated %}
+  {% if user.is_superuser %}
+    <h2><a href="{% url 'category_create' %}">create</a></h2>
+  {% endif %}
+{% endif %}
+
 {% for s_main in sw_main %}
 <a href="{% url 'category_detail' s_main.slug %}"><h2>{{s_main.title}}</h2></a>
-
 <p>{{s_main.main_cat}}</p>
 <small>{{s_main.date_created}}</small>
-
 {% endfor %}
 
 {% endblock content %}

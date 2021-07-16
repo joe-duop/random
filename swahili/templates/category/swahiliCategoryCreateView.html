@@ -1,17 +1,22 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>main cat form</title>
+<title>create category</title>
 {% endblock title %}
 
 {% block content %}
 
-<h2>main category form</h2>
-<form method="post">
-  {%csrf_token%}
-  {{form.as_p}}
-  <button type="submit">save</button>
-
-</form>
+{% if user.is_authenticated %}
+  {% if user.is_superuser %}
+    <h2>create category</h2>
+    <form method="post">
+      {%csrf_token%}
+      {{form.as_p}}
+      <button type="submit">save</button>
+    </form>
+  {% else %}
+    <h3>you are not allowed here</h3>
+  {% endif %}
+{% endif %}
 
 {% endblock content %}

@@ -1,17 +1,25 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>main cat form</title>
+<title>create sub-category</title>
 {% endblock title %}
 
 {% block content %}
 
-<h2>sub category form</h2>
+{% if user.is_authenticated %}
+{% if user.is_staff %}
+<h2>create sub category</h2>
 <form method="post">
   {%csrf_token%}
   {{form.as_p}}
   <button type="submit">save</button>
-
 </form>
+{% else %}
+  <h4>you are not allowed here</h4>
+{% endif %}
+
+{% endif %}
+
+
 
 {% endblock content %}

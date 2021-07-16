@@ -12,6 +12,9 @@ urlpatterns = [
     path('sub_cat', views.swahiliSubCategoryView, name="sub_category"),
     path('sub_cat/create', views.swahiliSubCategoryCreateView, name='sub_category_create'),
     path('sub_cat/<slug:slug>/', views.swahiliSubCategoryDetailView, name='sub_category_detail'),
+    path('sub_cat/<slug:slug>/update_sub', views.swahiliSubCategoryUpdateView, name='sub_category_update'),
+
+
 
     #content
     path('topic', views.swahiliView, name="swahili"),

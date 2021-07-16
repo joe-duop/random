@@ -48,6 +48,22 @@ def swahiliSubCategoryCreateView(request):
         context = {'form':SwahiliSubCategoryForm()}
         return render(request, "sub_category/swahiliSubCategoryCreateView.html", context)
 
+
+def swahiliSubCategoryUpdateView(request, slug):
+    """allows a user to edit/update sub-category"""
+    edit_sub = get_object_or_404(SwahiliSubCategory, slug=slug)
+    if request.method == 'POST':
+        sub_form = SwahiliSubCategoryForm(request.POST, instance=edit_sub)
+        if sub_form.is_valid():
+            sub_form.save()
+            return redirect('swahili')
+    else:
+        sub_form = SwahiliSubCategoryForm(instance=edit_sub)
+        context = {'edit_sub':edit_sub, 'sub_form':sub_form}
+        return render(request, 'sub_category/swahiliSubCategoryUpdateView.html', context)
+
+
+
 def swahiliSubCategoryDetailView(request, slug):
     """shows the details of a specific swahili-sub-category - the contents"""
     sw_sub_det = SwahiliSubCategory.objects.get(slug=slug)
