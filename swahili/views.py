@@ -1,6 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
+
 from .models import *
 from .forms import *
+
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 def homeView(request):
@@ -10,7 +14,7 @@ def homeView(request):
 #main category
 def swahiliCategoryView(request):
     """lists all the categories created"""
-    sw_main = SwahiliCategory.objects.all()
+    sw_main = Category.objects.all()
     context = {'sw_main':sw_main}
     return render(request, 'category/swahiliCategoryView.html', context)
 
@@ -26,7 +30,7 @@ def swahiliCategoryCreateView(request):
 
 def swahiliCategoryDetailView(request, the_slug):
     """shows the details of a specific category - the sub-categories"""
-    sw_main_det = SwahiliCategory.objects.get(slug=the_slug)
+    sw_main_det = Category.objects.get(slug=the_slug)
     context = {'sw_main_det':sw_main_det}
     return render(request, 'category/swahiliCategoryDetailView.html', context)
 
@@ -34,7 +38,7 @@ def swahiliCategoryDetailView(request, the_slug):
 # sub-category
 def swahiliSubCategoryView(request):
     """lists all the swahili-sub-categories created"""
-    sw_sub = SwahiliSubCategory.objects.all()
+    sw_sub = SubCategory.objects.all()
     context = {'sw_sub':sw_sub}
     return render(request, 'sub_category/swahiliSubCategoryView.html', context)
 
@@ -51,7 +55,7 @@ def swahiliSubCategoryCreateView(request):
 
 def swahiliSubCategoryUpdateView(request, slug):
     """allows a user to edit/update sub-category"""
-    edit_sub = get_object_or_404(SwahiliSubCategory, slug=slug)
+    edit_sub = get_object_or_404(SubCategory, slug=slug)
     if request.method == 'POST':
         sub_form = SwahiliSubCategoryForm(request.POST, instance=edit_sub)
         if sub_form.is_valid():
@@ -66,7 +70,7 @@ def swahiliSubCategoryUpdateView(request, slug):
 
 def swahiliSubCategoryDetailView(request, slug):
     """shows the details of a specific swahili-sub-category - the contents"""
-    sw_sub_det = SwahiliSubCategory.objects.get(slug=slug)
+    sw_sub_det = SubCategory.objects.get(slug=slug)
     context = {'sw_sub_det':sw_sub_det}
     return render(request, 'sub_category/swahiliSubCategoryDetailView.html', context)
 
@@ -74,7 +78,7 @@ def swahiliSubCategoryDetailView(request, slug):
 # content
 def swahiliView(request):
     """lists all the topics created"""
-    swahili = SwahiliContent.objects.all()
+    swahili = Content.objects.all()
     context = {'swahili':swahili}
     return render(request, 'topic/swahiliView.html', context)
 
@@ -92,7 +96,7 @@ def swahiliCreateView(request):
 
 def swahiliUpdateView(request, slug_text):
     """allows a user to edit/update content"""
-    edit_content = get_object_or_404(SwahiliContent, slug=slug_text)
+    edit_content = get_object_or_404(Content, slug=slug_text)
     if request.method == 'POST':
         content_form = SwahiliContentForm(request.POST, instance=edit_content)
         if content_form.is_valid():
@@ -106,6 +110,13 @@ def swahiliUpdateView(request, slug_text):
 
 def swahiliDetailView(request, slug_text):
     """shows the details of a specific topic - the contents"""
-    swahili_det = get_object_or_404(SwahiliContent, slug=slug_text)
-    context = {'swahili_det':swahili_det}
+    swahili_det = get_object_or_404(Content, slug=slug_text)
+    total_likes = swahili_det.total_likes()
+    context = {'swahili_det':swahili_det, 'total_likes':total_likes}
     return render(request, 'topic/swahiliDetailView.html', context)
+
+
+def likeView(request, pk):
+    like_c = get_object_or_404(Content, id=request.POST.get('post_id'))
+    like_c.likes.add(request.user)
+    return redirect('swahili') #todo

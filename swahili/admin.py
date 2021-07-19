@@ -2,6 +2,6 @@ from django.contrib import admin
 from . import models
 
 # Register your models here.
-admin.site.register(models.SwahiliCategory)
-admin.site.register(models.SwahiliSubCategory)
-admin.site.register(models.SwahiliContent)
+admin.site.register(models.Category)
+admin.site.register(models.SubCategory)
+admin.site.register(models.Content)

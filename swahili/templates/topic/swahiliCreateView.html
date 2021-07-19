@@ -19,6 +19,10 @@
             <button class="btn btn-primary" type="submit">save</button>
           </form>
         </div>
+        <script type="text/javascript">
+          let name = "{{user.id}}";
+          document.getElementById("author").value = name;
+        </script>
     {% else %}
       <h3>you are not allowed here</h3>
     {% endif %}

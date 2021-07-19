@@ -5,19 +5,19 @@ from .models import *
 
 class SwahiliCategoryForm(forms.ModelForm):
     class Meta:
-        model = SwahiliCategory
+        model = Category
         fields = ['title']
 
 
 class SwahiliSubCategoryForm(forms.ModelForm):
     class Meta:
-        model = SwahiliSubCategory
+        model = SubCategory
         fields = ['title','cat']
 
 
 class SwahiliContentForm(forms.ModelForm):
     class Meta:
-        model = SwahiliContent
+        model = Content
         fields = ['title','main_cat','category','content','date_created','author']
 
         widgets = {
@@ -26,5 +26,6 @@ class SwahiliContentForm(forms.ModelForm):
             'category':forms.Select(attrs={'class': 'form-control'}),
             'content':forms.Textarea(attrs={'class': 'form-control'}),
             'date_created':forms.TextInput(attrs={'class': 'form-control'}),
-            'author':forms.Select(attrs={'class': 'form-control'}),
+            'author':forms.TextInput(attrs={'class': 'form-control','value':'', 'id':'author', 'type':'hidden'}),
+            # 'author':forms.Select(attrs={'class': 'form-control'}),
         }
