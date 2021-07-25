@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>{{cat_details.title}}</title>
+<title>category | {{sw_main_det.title}}</title>
 {% endblock title %}
 
 {% block content %}
 
-{% for cat in sw_main_det.swahilisubcategory_set.all %}
+<h1>category | {{sw_main_det.title}}</h1>
+
+{% for cat in sw_main_det.subcategory_set.all %}
 <h2><a href="{% url 'sub_category_detail' cat.slug %}">{{cat.title}}</a></h2>
 {% endfor %}
 

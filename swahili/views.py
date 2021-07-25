@@ -8,7 +8,7 @@ from django.db import IntegrityError
 from django.contrib.auth import login, logout, authenticate
 
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect 
 
 # Create your views here.
 def homeView(request):

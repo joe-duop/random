@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
@@ -8,6 +7,7 @@ from django.utils import timezone
 
 from madapalace.utils import unique_slug_generator
 from django.db.models.signals import pre_save
+
 
 # Create your models here.
 class Category(models.Model):
@@ -21,7 +21,7 @@ class Category(models.Model):
 class SubCategory(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(null=True, blank=True)
-    cat = models.ForeignKey(Category, on_delete=models.CASCADE)
+    cat = models.ForeignKey(Category,blank=True, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.title
@@ -30,8 +30,8 @@ class SubCategory(models.Model):
 class Content(models.Model):
     #TODO: the id for arrangement
     title = models.CharField(max_length=100)
-    main_cat = models.ForeignKey(Category, on_delete=models.CASCADE)
-    category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
+    main_cat = models.ForeignKey(Category,blank=True, null=True, on_delete=models.SET_NULL)
+    category = models.ForeignKey(SubCategory,blank=True, null=True, on_delete=models.SET_NULL)
     slug = models.SlugField(null=True, blank=True)
     date_created = models.DateField()
     # date_modified = models.DateTimeField(default=timezone.now, null=True, blank=True)

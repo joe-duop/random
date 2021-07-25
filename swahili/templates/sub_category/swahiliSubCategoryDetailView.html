@@ -1,17 +1,18 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>sub cat detail</title>
+<title>{{sw_sub_det.cat}} | {{sw_sub_det.title}}</title>
 {% endblock title %}
 
 {% block content %}
 
+<h1>{{sw_sub_det.cat}}</h1> | <h1>{{sw_sub_det.title}}</h1>
 
 {% if user.is_staff %}
-  <h4><a href="{% url 'sub_category_update' sw_sub_det.slug %}">update subcat - {{sw_sub_det.title}} </a></h4>
+  <a href="{% url 'sub_category_update' sw_sub_det.slug %}">update subcat - {{sw_sub_det.title}} </a>
 {% endif %}
 
-{% for sub_cat in sw_sub_det.swahilicontent_set.all %}
+{% for sub_cat in sw_sub_det.content_set.all %}
 <h2><a href="{% url 'swahili_detail' sub_cat.slug %}">{{sub_cat.title}}</a></h2>
 {% endfor %}
 

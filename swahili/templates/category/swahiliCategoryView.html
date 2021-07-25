@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>sarufi</title>
+<title>category</title>
 {% endblock title %}
 
 {% block content %}
 
 <p>current user {{user.username}}</p>
 
+<h1>category</h1>
 
   {% if user.is_superuser %}
-    <h2><a href="{% url 'category_create' %}">create</a></h2>
+    <a href="{% url 'category_create' %}">create</a>
   {% endif %}
 
 
