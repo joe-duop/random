@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from django.utils import timezone
+from django.urls import reverse
 
 from madapalace.utils import unique_slug_generator
 from django.db.models.signals import pre_save
@@ -45,6 +46,10 @@ class Content(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self): # new
+        return reverse('swahili_detail', args=[str(self.slug)])
+
 
 def slug_generator(sender, instance, *args, **kwargs):
     if not instance.slug:

@@ -8,7 +8,7 @@ from django.db import IntegrityError
 from django.contrib.auth import login, logout, authenticate
 
 from django.urls import reverse
-from django.http import HttpResponseRedirect 
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 def homeView(request):
@@ -140,4 +140,4 @@ def swahiliDetailView(request, slug_text):
 def likeView(request, pk):
     like_c = get_object_or_404(Content, id=request.POST.get('post_id'))
     like_c.likes.add(request.user)
-    return redirect('swahili') #todo
+    return redirect('swahili')

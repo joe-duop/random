@@ -28,12 +28,15 @@
 <br>
 <hr>
 <br>
+
 <form action="{% url 'like_content' swahili_det.pk %}" method="post">
   {% csrf_token %}
   <button type="submit" name="post_id" value="{{ swahili_det.id }}">
     like - {{total_likes}}
   </button>
 </form>
+
+
 <br>
 <hr>
 <br>
