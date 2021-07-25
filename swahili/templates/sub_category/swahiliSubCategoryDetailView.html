@@ -6,10 +6,9 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
+
 {% if user.is_staff %}
   <h4><a href="{% url 'sub_category_update' sw_sub_det.slug %}">update subcat - {{sw_sub_det.title}} </a></h4>
-{% endif %}
 {% endif %}
 
 {% for sub_cat in sw_sub_det.swahilicontent_set.all %}

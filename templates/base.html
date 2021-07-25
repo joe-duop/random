@@ -23,6 +23,19 @@
     <a href="{% url 'swahili' %}">content</a>
     <a href="#">about</a>
     <a href="#">contact</a>
+
+    <div class="container-fluid text-center">
+      <h1>my website</h1>
+      {% if user.is_authenticated %}
+        <p>logged in as {{user.username}}</p>
+        <a class="btn btn-danger" href="{% url 'logout' %}">logout</a>
+        <a class="btn btn-outline-info" href="{% url 'password_change' %}">password change</a>
+      {% else %}
+        <a class="btn btn-outline-primary" href="{% url 'login' %}">login</a>
+        <a class="btn btn-success" href="{% url 'signup' %}">Sign up</a>
+      {% endif %}
+    </div>
+
     {% block content %}
     {% endblock content %}
 

@@ -1,8 +1,10 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
     path('', views.homeView, name="home"),
+    path('signup', views.signUpUser, name="signup"),
+    path('user/', include('django.contrib.auth.urls')),
     #main_category
     path('category', views.swahiliCategoryView, name="category"),
     path('category/create', views.swahiliCategoryCreateView, name='category_create'),

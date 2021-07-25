@@ -6,7 +6,7 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
+
   {% if user.is_superuser %}
     <h2>create category</h2>
     <form method="post">
@@ -17,6 +17,6 @@
   {% else %}
     <h3>you are not allowed here</h3>
   {% endif %}
-{% endif %}
+
 
 {% endblock content %}

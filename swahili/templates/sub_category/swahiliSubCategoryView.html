@@ -6,11 +6,11 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
+
   {% if user.is_superuser %}
     <h2><a href="{% url 'sub_category_create' %}">create</a></h2>
   {% endif %}
-{% endif %}
+
 
 
 {% for sub in sw_sub %}

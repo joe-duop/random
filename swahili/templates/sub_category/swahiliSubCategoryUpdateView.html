@@ -6,7 +6,7 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
+
 {% if user.is_staff %}
   <h2>update sub form</h2>
   <div class="container">
@@ -20,7 +20,7 @@
 {% else %}
   <h3>you are not allowed here</h3>
 {% endif %}
-{% endif %}
+
 
 
 

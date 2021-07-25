@@ -3,12 +3,33 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
 from .forms import *
 
+from django.contrib.auth.forms import UserCreationForm
+from django.db import IntegrityError
+from django.contrib.auth import login, logout, authenticate
+
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 
 # Create your views here.
 def homeView(request):
     return render(request, 'home.html')
+
+
+def signUpUser(request):
+    if request.method == 'GET':
+        return render(request, 'signUpView.html', {'form':UserCreationForm()})
+    else:
+        """if the request.method is post"""
+        if request.POST['password1'] == request.POST['password2']:
+            try:
+                user = User.objects.create_user(request.POST['username'], password=request.POST['password1'])
+                user.save()
+                return redirect('login')
+            except IntegrityError:
+                return render(request, 'signUpView.html', {'form':UserCreationForm(), 'error':'That username has already been taken. Please choose a new username'})
+        else:
+            return render(request, 'signUpView.html', {'form':UserCreationForm(), 'error':'Passwords did not match'})
+
 
 
 #main category

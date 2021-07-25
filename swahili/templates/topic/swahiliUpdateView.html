@@ -6,7 +6,7 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
+
   {% if user.is_staff %}
     {% if user.id == edit_content.author.id %}
     <h2>content form</h2>
@@ -22,7 +22,7 @@
   {% else %}
     <h3>you are not allowed here</h3>
   {% endif %}
-{% endif %}
+
 
 
 

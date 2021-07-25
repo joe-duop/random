@@ -6,7 +6,11 @@
 
 {% block content %}
 
-<h2><a href="{% url 'swahili_create' %}">create</a></h2>
+{% if user.is_staff %}
+  <h2><a href="{% url 'swahili_create' %}">create</a></h2>
+{% endif %}
+
+
 {% for swa in swahili %}
 <a href="{% url 'swahili_detail' swa.slug %}"><h2>{{swa.title}}</h2></a>
 
