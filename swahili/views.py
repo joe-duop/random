@@ -133,11 +133,22 @@ def swahiliDetailView(request, slug_text):
     """shows the details of a specific topic - the contents"""
     swahili_det = get_object_or_404(Content, slug=slug_text)
     total_likes = swahili_det.total_likes()
-    context = {'swahili_det':swahili_det, 'total_likes':total_likes}
+
+    liked = False
+    if swahili_det.likes.filter(id=request.user.id).exists():
+        liked = True
+
+    context = {'swahili_det':swahili_det, 'total_likes':total_likes, "liked":liked}
     return render(request, 'topic/swahiliDetailView.html', context)
 
 
 def likeView(request, pk):
     like_c = get_object_or_404(Content, id=request.POST.get('post_id'))
-    like_c.likes.add(request.user)
+    liked = False
+    if like_c.likes.filter(id=request.user.id).exists():
+        like_c.likes.remove(request.user)
+        liked = False
+    else:
+        like_c.likes.add(request.user)
+        liked = True
     return redirect('swahili')
