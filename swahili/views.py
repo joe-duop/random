@@ -138,8 +138,26 @@ def swahiliDetailView(request, slug_text):
     if swahili_det.likes.filter(id=request.user.id).exists():
         liked = True
 
-    context = {'swahili_det':swahili_det, 'total_likes':total_likes, "liked":liked}
+    if request.method == 'POST':
+        form = addCommentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('swahili')
+    else:
+        context = {'form':addCommentForm()}
+
+    context = {'swahili_det':swahili_det, 'total_likes':total_likes, "liked":liked, 'form':addCommentForm()}
     return render(request, 'topic/swahiliDetailView.html', context)
+
+# def swahiliAddComment(request):
+#     if request.method == 'POST':
+#         form = addCommentForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('swahili')
+#     else:
+#         context = {'form':addCommentForm()}
+#         return render(request, "topic/swahiliDetailView.html", context)
 
 
 def likeView(request, pk):

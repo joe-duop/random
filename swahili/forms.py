@@ -29,3 +29,8 @@ class SwahiliContentForm(forms.ModelForm):
             'author':forms.TextInput(attrs={'class': 'form-control','value':'', 'id':'author', 'type':'hidden'}),
             # 'author':forms.Select(attrs={'class': 'form-control'}),
         }
+
+class addCommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = "__all__"

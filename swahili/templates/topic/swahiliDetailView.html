@@ -25,22 +25,25 @@
 <small>{{swahili_det.date_created}}</small>
 <p>{{swahili_det.content|safe}}</p>
 <p>written by <small>{{swahili_det.author}}</small></p>
+
+
 <br>
 <hr>
 <br>
-
 <form action="{% url 'like_content' swahili_det.pk %}" method="post">
   {% csrf_token %}
-
-  {% if liked %}
-      <button class="btn btn-danger" type="submit" name="post_id" value="{{ swahili_det.id }}">
-        unlike
-      </button>
+  {% if user.is_authenticated %}
+    {% if liked %}
+        <button class="btn btn-danger" type="submit" name="post_id" value="{{ swahili_det.id }}">
+          unlike
+        </button>
+    {% else %}
+        <button class="btn btn-primary" type="submit" name="post_id" value="{{ swahili_det.id }}">
+          like
+        </button>
+    {% endif %}
   {% else %}
-      <button class="btn btn-primary" type="submit" name="post_id" value="{{ swahili_det.id }}">
-        like
-      </button>
-
+        <small>login to like</small>
   {% endif %}
   <small> - {{total_likes}} likes</small>
 </form>
@@ -49,5 +52,28 @@
 <br>
 <hr>
 <br>
+
+<h3>commments...</h3>
+    {% for comment in swahili_det.comments.all %}
+      <strong>{{comment.name}} - {{comment.date_added}}</strong>
+      <br>
+      {{comment.body }}
+      <br></br>
+    {% endfor %}
+
+    <h2>add comment</h2>
+    <div class="form-group">
+      <form method="post">
+        {%csrf_token%}
+        {{form}}
+        <button class="btn btn-primary" type="submit">save</button>
+      </form>
+    </div>
+
+<br>
+<hr>
+<br>
+
+
 
 {% endblock content %}

@@ -51,6 +51,17 @@ class Content(models.Model):
         return reverse('swahili_detail', args=[str(self.slug)])
 
 
+class Comment(models.Model):
+    post = models.ForeignKey(Content, related_name="comments", on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    body = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.post.title} - {self.name}'
+
+
+
 def slug_generator(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = unique_slug_generator(instance)

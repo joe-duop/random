@@ -5,3 +5,4 @@ from . import models
 admin.site.register(models.Category)
 admin.site.register(models.SubCategory)
 admin.site.register(models.Content)
+admin.site.register(models.Comment)
